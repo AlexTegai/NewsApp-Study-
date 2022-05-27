@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ru.alte.newsapp.R
-import ru.alte.newsapp.databinding.FragmentFavoriteBinding
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+import ru.alte.newsapp.MainViewModel
 import ru.alte.newsapp.databinding.FragmentMainBinding
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
+
+    private val viewModel by viewModels<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,4 +25,8 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.all
+    }
 }
